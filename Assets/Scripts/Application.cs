@@ -8,11 +8,13 @@ public class Application : MonoBehaviour {
     public PickLevelController pickLevelCtrl;
     public SnakeController snakeCtrl;
 
-	// Use this for initialization
-	void Start () {
+    private List<ICameraUser> camUsers = null;
+
+    // Use this for initialization
+    void Start ()
+    {
         mainMenuCtrl.setVisibility(true);
         pickLevelCtrl.setVisibility(false);
-        pickLevelCtrl.pickLevelV.pickLevelM.LevelsCount = 40;
     }
 	
 	// Update is called once per frame
@@ -20,6 +22,16 @@ public class Application : MonoBehaviour {
 		
 	}
 
-    
+    internal List<ICameraUser> GetCameraUsers()
+    {
+        if(camUsers == null)
+        {
+            camUsers = new List<ICameraUser>();
+            camUsers.Add(mainMenuCtrl);
+            camUsers.Add(pickLevelCtrl);
+            camUsers.Add(snakeCtrl);
+        }
+        return camUsers;
+    }
 
 }

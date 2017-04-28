@@ -13,22 +13,6 @@ public class PickLevelView : MonoBehaviour {
 
     public PickLevelModel pickLevelM;
 
-    private bool isLvlCntChanged;
-
-    public bool IsLevelsCountChanged
-    {
-        get {
-            lock (PickLevelModel.LOCK_NAME_COUNT_LEVELS) {
-                if (isLvlCntChanged && !pickLevelM.IsLevelsCountChanged)
-                {
-                    isLvlCntChanged = pickLevelM.IsLevelsCountChanged;
-                }
-                return isLvlCntChanged;
-            }
-        }
-        set { lock (PickLevelModel.LOCK_NAME_COUNT_LEVELS) { isLvlCntChanged = value; } }
-    }
-
     // Use this for initialization
     void Start() {
         InitLevels();
@@ -36,11 +20,7 @@ public class PickLevelView : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (pickLevelM.IsLevelsCountChanged) {
-            IsLevelsCountChanged = true;
-            while (IsLevelsCountChanged);
-            pickLevelM.IsLevelsCountChanged = false;
-        }
+        
     }
 
     
@@ -52,6 +32,7 @@ public class PickLevelView : MonoBehaviour {
         {
             string levelDesc = pickLevelM.GetLevelDescription(curLevel);
             cur.GetComponentInChildren<Text>().text = levelDesc;
+            cur.enabled = pickLevelM.IsLevelUnlocked(curLevel);
             curLevel++;
         }
     }
@@ -62,7 +43,6 @@ public class PickLevelView : MonoBehaviour {
         while (pickLevelM.LevelsButtons.Capacity == 0) ;
         int row = 0;
         int col = 0;
-        Debug.Log("CNT LVLS = " + pickLevelM.LevelsButtons.Capacity);
         foreach (Button cur in pickLevelM.LevelsButtons)
         {
             cur.transform.position = GetButtonPosition(
@@ -92,10 +72,7 @@ public class PickLevelView : MonoBehaviour {
         float z = pickLevelM.pickLevelCanvas.transform.position.z;
         x += col * (BTN_SPACE_X + btnW) + BTN_DELTA_X;
         y += row * (BTN_SPACE_Y + btnH) - BTN_DELTA_Y;
-        Debug.Log("x = " + x + " row = " + row);
-        Debug.Log("y = " + y + " col = " + col);
-        Vector3 retVal = new Vector3(x, y, z);
-        return retVal;
+        return new Vector3(x, y, z);
     }
 
 }
