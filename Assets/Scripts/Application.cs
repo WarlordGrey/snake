@@ -10,11 +10,16 @@ public class Application : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        mainMenuCtrl.setVisibility(true);
+        pickLevelCtrl.setVisibility(false);
+        pickLevelCtrl.pickLevelV.pickLevelM.LevelsCount = 40;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    
+
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour {
 
+    public Application app;
     public MainMenuView mainMenuV;
 
 	// Use this for initialization
@@ -15,4 +16,21 @@ public class MainMenuController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void setVisibility(bool visibility)
+    {
+        mainMenuV.mainMenuModel.mainCanvas.gameObject.SetActive(visibility);
+    }
+
+    public void onBtnPlayClick()
+    {
+        setVisibility(false);
+        app.pickLevelCtrl.setVisibility(true);
+    }
+
+    public void onBtnResetClick()
+    {
+
+    }
+
 }

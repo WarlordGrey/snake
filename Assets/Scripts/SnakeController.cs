@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SnakeController : MonoBehaviour {
 
+    public Application app;
     public SnakeView snakeV;
 
 	// Use this for initialization
