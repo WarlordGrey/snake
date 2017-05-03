@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using UnityEngine;
 
     class DataManipulator
     {
@@ -26,7 +27,6 @@ using System.Xml.Serialization;
         public void SerializeObject<T>(T serializableObject, string fileName)
         {
             if (serializableObject == null) { return; }
-
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
@@ -42,7 +42,9 @@ using System.Xml.Serialization;
             }
             catch (Exception ex)
             {
-                //Log exception here
+            //Log exception here
+            Debug.Log(ex);
+            Debug.Log(ex.StackTrace);
             }
         }
 

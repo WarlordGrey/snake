@@ -5,8 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{EA5E5C94-03A1-AEDC-67AD-8DF2AB077E38}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -47,41 +46,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Application.cs" />
-    <Compile Include="Assets\Scripts\ButtonLevelData.cs" />
-    <Compile Include="Assets\Scripts\DataManipulator.cs" />
-    <Compile Include="Assets\Scripts\ICameraUser.cs" />
-    <Compile Include="Assets\Scripts\MainMenuController.cs" />
-    <Compile Include="Assets\Scripts\MainMenuModel.cs" />
-    <Compile Include="Assets\Scripts\MainMenuView.cs" />
-    <Compile Include="Assets\Scripts\PickLevelController.cs" />
-    <Compile Include="Assets\Scripts\PickLevelData.cs" />
-    <Compile Include="Assets\Scripts\PickLevelModel.cs" />
-    <Compile Include="Assets\Scripts\PickLevelView.cs" />
-    <Compile Include="Assets\Scripts\SnakeController.cs" />
-    <Compile Include="Assets\Scripts\SnakeModel.cs" />
-    <Compile Include="Assets\Scripts\SnakeView.cs" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HoloLens">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VR">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\Scripts\Application.cs" />
+     <Compile Include="Assets\Scripts\ButtonLevelData.cs" />
+     <Compile Include="Assets\Scripts\DataManipulator.cs" />
+     <Compile Include="Assets\Scripts\GameObjectNames.cs" />
+     <Compile Include="Assets\Scripts\ICameraUser.cs" />
+     <Compile Include="Assets\Scripts\IncrementerController.cs" />
+     <Compile Include="Assets\Scripts\MainMenuController.cs" />
+     <Compile Include="Assets\Scripts\MainMenuModel.cs" />
+     <Compile Include="Assets\Scripts\MainMenuView.cs" />
+     <Compile Include="Assets\Scripts\PickLevelController.cs" />
+     <Compile Include="Assets\Scripts\PickLevelData.cs" />
+     <Compile Include="Assets\Scripts\PickLevelModel.cs" />
+     <Compile Include="Assets\Scripts\PickLevelView.cs" />
+     <Compile Include="Assets\Scripts\SingleLevelData.cs" />
+     <Compile Include="Assets\Scripts\SnakeAllBodyPartController.cs" />
+     <Compile Include="Assets\Scripts\SnakeBodyController.cs" />
+     <Compile Include="Assets\Scripts\SnakeCameraController.cs" />
+     <Compile Include="Assets\Scripts\SnakeController.cs" />
+     <Compile Include="Assets\Scripts\SnakeDirection.cs" />
+     <Compile Include="Assets\Scripts\SnakeHeadController.cs" />
+     <Compile Include="Assets\Scripts\SnakeModel.cs" />
+     <Compile Include="Assets\Scripts\SnakeView.cs" />
+     <Compile Include="Assets\Scripts\WallBodyController.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -91,4 +99,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>

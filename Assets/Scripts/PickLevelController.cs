@@ -12,6 +12,7 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     public PickLevelView pickLevelV;
 
     private int curPage;
+    private int curLevel;
 
     // Use this for initialization
     void Start () {
@@ -39,7 +40,8 @@ public class PickLevelController : MonoBehaviour, ICameraUser
 
     private void OnBtnPickLevelClick()
     {
-        app.snakeCtrl.loadLevel(EventSystem.current.currentSelectedGameObject.GetComponent<ButtonLevelData>().Lvl);
+        curLevel = EventSystem.current.currentSelectedGameObject.GetComponent<ButtonLevelData>().Lvl;
+        app.snakeCtrl.loadLevel(curLevel);
         setVisibility(false);
         app.snakeCtrl.SetVisibility(true);
     }
@@ -87,7 +89,6 @@ public class PickLevelController : MonoBehaviour, ICameraUser
         if(lvlsData == null)
         {
             lvlsData = CreateNewLevelsData();
-            CreateNewLevelsData();
             SaveLevelsData(lvlsData);
         }
         pickLevelV.pickLevelM.SetLevelsData(lvlsData);
@@ -97,12 +98,13 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     private PickLevelData CreateNewLevelsData()
     {
         PickLevelData lvlsData = new PickLevelData();
-        List<int> highScores = new List<int>();
+        List<SingleLevelData> allLevels = new List<SingleLevelData>();
+        while (pickLevelV.pickLevelM.LevelsCount <= 0) ;
         for (int i = 0; i < pickLevelV.pickLevelM.LevelsCount; i++)
         {
-            highScores.Add(0);
+            allLevels.Add(new SingleLevelData(0));
         }
-        lvlsData.HighScores = highScores;
+        lvlsData.AllLevels = allLevels;
         return lvlsData;
     }
 
@@ -114,6 +116,7 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     public void SetLevelNewHighScore(int level, int score)
     {
         pickLevelV.pickLevelM.SetLevelsHighScore(level, score);
+        SaveLevelsData(pickLevelV.pickLevelM.GetLevelsData());
     }
 
     public void ReloadLevelsData()
@@ -135,6 +138,11 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     {
         pickLevelV.pickLevelM.camera.gameObject.SetActive(false);
         pickLevelV.pickLevelM.camera.enabled = false;
+    }
+
+    public void SetLevelCompleted(int level)
+    {
+        pickLevelV.pickLevelM.SetLevelCompleted(level);
     }
 
 }

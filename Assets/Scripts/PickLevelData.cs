@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PickLevelData {
 
-	public List<int> HighScores { set; get; } 
+    public List<SingleLevelData> AllLevels { get; set; }
+    
 
 }

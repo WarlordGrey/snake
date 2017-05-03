@@ -6,12 +6,7 @@ using UnityEngine;
 
 class ButtonLevelData : MonoBehaviour
 {
-
-      public ButtonLevelData(int lvl)
-    {
-        Lvl = lvl;
-    }
-      public int Lvl { get; set; }
+    public int Lvl { get; set; }
 
     void Start()
     {

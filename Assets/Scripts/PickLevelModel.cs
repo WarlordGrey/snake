@@ -48,8 +48,8 @@ public class PickLevelModel : MonoBehaviour
         {
             Button newLvl = Button.Instantiate(typicalPickLevelButton);
             newLvl.transform.SetParent(pickLevelCanvas.gameObject.transform);
-            ButtonLevelData bld = new ButtonLevelData(i + 1);
             newLvl.gameObject.AddComponent<ButtonLevelData>();
+            newLvl.gameObject.GetComponent<ButtonLevelData>().Lvl = i + 1;
             LevelsButtons.Add(newLvl);
         }
     }
@@ -70,7 +70,7 @@ public class PickLevelModel : MonoBehaviour
         {
             return true;
         }
-        return (GetLevelsHighScore(level - 1) > 0);
+        return IsLevelCompleted(level - 1);
     }
 
     public void SetLevelsData(PickLevelData lvlsData)
@@ -78,26 +78,49 @@ public class PickLevelModel : MonoBehaviour
         this.lvlsData = lvlsData;
     }
 
+    public PickLevelData GetLevelsData()
+    {
+        return lvlsData;
+    }
+
     public int GetLevelsHighScore(int level)
     {
         int highScore = 0;
-        if (lvlsData.HighScores.Count > level)
+        if (lvlsData.AllLevels.Count > level)
         {
-            highScore = lvlsData.HighScores[(level - 1)];
+            highScore = lvlsData.AllLevels[(level - 1)].HighScore;
         }
         return highScore;
     }
 
     public void SetLevelsHighScore(int level, int score)
     {
-        if (lvlsData.HighScores.Count <= level)
+        if (lvlsData.AllLevels.Count <= level)
         {
             return;
         }
         if (score > GetLevelsHighScore(level))
         {
-            lvlsData.HighScores[(level - 1)] = score;
+            lvlsData.AllLevels[(level - 1)].HighScore = score;
         }
+    }
+
+    public void SetLevelCompleted(int level)
+    {
+        if (lvlsData.AllLevels.Count <= level)
+        {
+            return;
+        }
+        lvlsData.AllLevels[(level - 1)].IsCompleted = true;
+    }
+
+    public bool IsLevelCompleted(int level)
+    {
+        if (lvlsData.AllLevels.Count <= level)
+        {
+            return false;
+        }
+        return lvlsData.AllLevels[(level - 1)].IsCompleted;
     }
 
 }
