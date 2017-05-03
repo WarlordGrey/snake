@@ -5,8 +5,8 @@ using UnityEngine;
 public class IncrementerController : MonoBehaviour
 {
 
-    private const float SLEEP_TIME = 10;
-    private const float REPEAT_RATE = 10;
+    private const float SLEEP_TIME = 50;
+    private const float REPEAT_RATE = 50;
 
     public Application App { get; set; }
 

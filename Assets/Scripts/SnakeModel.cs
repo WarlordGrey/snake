@@ -9,6 +9,10 @@ public class SnakeModel : MonoBehaviour
     public const int GROUND_X = 0;
     public const int GROUND_Z = 0;
     public const char EMPTY_SPACE = ' ';
+    public const string MSG_DO_YOU_WANT_LEAVE = "Are you sure you want to leave game?";
+    public const string MSG_WIN = "Level completed!";
+    public const string MSG_LOSE = "You lost. Try again!";
+    public const string MSG_THERE_IS_NO_SUCH_LEVEL = "Oops! This level is currently blocked by developers. :(";
 
     private const float POSITION_THRESHOLD = 4.5f;
     private const int START_INCREMENTER = 0;
@@ -22,9 +26,10 @@ public class SnakeModel : MonoBehaviour
     public PhysicMaterial groundPhysMaterial;
     public Texture2D[] groundTexture;
     public float speed;
-    private Vector3 startPosition = new Vector3(1, 5f, 1);
-
     public Vector3 tmpPos;
+
+    private Vector3 startPosition = new Vector3(1, 5f, 1);
+    private delegate void OnClickActionImpl();
 
     public List<GameObject> AllWalls { get; set; }
     
@@ -41,6 +46,8 @@ public class SnakeModel : MonoBehaviour
 
     public GameObject CurrentIncrementerGameObject { get; set; }
 
+    public bool IsGameFrozen { get; set; }
+
     // Use this for initialization
     void Start () {
         SnakeBody = null;
@@ -48,6 +55,7 @@ public class SnakeModel : MonoBehaviour
         CanAddNewElement = false;
         InitIncrementor();
         CurrentScore = 0;
+        IsGameFrozen = false;
     }
 	
 	// Update is called once per frame

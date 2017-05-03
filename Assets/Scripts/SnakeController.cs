@@ -9,9 +9,12 @@ public class SnakeController : MonoBehaviour, ICameraUser {
     public SnakeView snakeV;
 
     private SnakeDirection curDirection;
-         
-	// Use this for initialization
-	void Start () {
+    private bool isLastDialogAccepted;
+    private ContinueMethod currentContinueMethod;
+    private delegate void ContinueMethod();
+
+    // Use this for initialization
+    void Start () {
         curDirection = SnakeDirection.RIGHT;
     }
 	
@@ -50,9 +53,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
         snakeV.snakeM.CurrentLevel = level;
         if (!LoadLevelGround())
         {
-            SetVisibility(false);
-            //todo error msg
-            app.pickLevelCtrl.setVisibility(true);
+            ShowDialogBox(SnakeModel.MSG_THERE_IS_NO_SUCH_LEVEL, false,LoadLevelContinueAfterError);
             return;
         }
         SetSnakeDirection(curDirection);
@@ -60,6 +61,12 @@ public class SnakeController : MonoBehaviour, ICameraUser {
         snakeV.snakeM.SnakeBody.First.Value.GetComponent<SnakeHeadController>().App = app;
         GenerateIncrementer();
         snakeV.snakeM.LevelWinScore = level * SnakeModel.WIN_MUL;
+    }
+
+    private void LoadLevelContinueAfterError()
+    {
+        SetVisibility(false);
+        app.pickLevelCtrl.setVisibility(true);
     }
 
     public void EnableCamera()
@@ -113,21 +120,44 @@ public class SnakeController : MonoBehaviour, ICameraUser {
 
     public void Lose()
     {
-        //TODO lose msg
+        FreezeGame(true);
+        ShowDialogBox(SnakeModel.MSG_LOSE, false, LoseContinueMethod);
+    }
+
+    private void LoseContinueMethod()
+    {
         ExitFromLevel();
     }
 
     public void Win()
     {
-        //TODO win msg
+        FreezeGame(true);
+        ShowDialogBox(SnakeModel.MSG_WIN, false, WinContinueMethod);
+    }
+
+    public void WinContinueMethod()
+    {
         app.pickLevelCtrl.SetLevelCompleted(snakeV.snakeM.CurrentLevel);
         ExitFromLevel();
     }
 
     public void ExitAttempt()
     {
-        //TODO
-        ExitFromLevel(false);
+        FreezeGame(true);
+        ShowDialogBox(SnakeModel.MSG_DO_YOU_WANT_LEAVE,true,ExitAttemptContinueMethod);
+        
+    }
+
+    private void ExitAttemptContinueMethod()
+    {
+        if (isLastDialogAccepted)
+        {
+            ExitFromLevel(false);
+        }
+        else
+        {
+            FreezeGame(false);
+        }
     }
 
     private void ExitFromLevel()
@@ -192,6 +222,47 @@ public class SnakeController : MonoBehaviour, ICameraUser {
     {
         snakeV.GenerateIncrementer();
         snakeV.snakeM.CurrentIncrementerGameObject.GetComponent<IncrementerController>().App = app;
+    }
+
+    private void FreezeGame(bool freezeStatus)
+    {
+        snakeV.snakeM.IsGameFrozen = freezeStatus;
+    }
+
+    private void DialogBoxOkClicked()
+    {
+        isLastDialogAccepted = true;
+        HideDialogBox();
+    }
+
+    private void DialogBoxCancelClicked()
+    {
+        isLastDialogAccepted = false;
+        HideDialogBox();
+    }
+
+    private void HideDialogBox()
+    {
+        app.dialogCtrl.SetVisibility(false);
+        if (currentContinueMethod != null)
+        {
+            currentContinueMethod();
+        }
+    }
+
+    private void ShowDialogBox(string msg, bool showCancel, ContinueMethod contMeth)
+    {
+        currentContinueMethod = contMeth;
+        app.dialogCtrl.SetVisibilityButtonOk(true);
+        app.dialogCtrl.okClickImpl = DialogBoxOkClicked;
+        if (showCancel)
+        {
+            app.dialogCtrl.cancelClickImpl = DialogBoxCancelClicked;
+        }
+        app.dialogCtrl.SetVisibilityButtonCancel(showCancel);
+        app.dialogCtrl.SetText(msg);
+        app.dialogCtrl.SetVisibility(true);
+        //SetVisibility(false);
     }
 
 }

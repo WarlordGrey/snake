@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\Application.cs" />
      <Compile Include="Assets\Scripts\ButtonLevelData.cs" />
      <Compile Include="Assets\Scripts\DataManipulator.cs" />
+     <Compile Include="Assets\Scripts\DialogBoxController.cs" />
+     <Compile Include="Assets\Scripts\DialogBoxView.cs" />
      <Compile Include="Assets\Scripts\GameObjectNames.cs" />
      <Compile Include="Assets\Scripts\ICameraUser.cs" />
      <Compile Include="Assets\Scripts\IncrementerController.cs" />

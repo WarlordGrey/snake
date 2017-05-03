@@ -7,6 +7,7 @@ public class Application : MonoBehaviour {
     public MainMenuController mainMenuCtrl;
     public PickLevelController pickLevelCtrl;
     public SnakeController snakeCtrl;
+    public DialogBoxController dialogCtrl;
 
     private List<ICameraUser> camUsers = null;
 

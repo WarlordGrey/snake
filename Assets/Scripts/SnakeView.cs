@@ -35,6 +35,7 @@ public class SnakeView : MonoBehaviour
 
     private void Init()
     {
+        snakeM.IsGameFrozen = true;
         DestroySnake();
         snakeM.transform.position = GetRandomMapPosition();
         snakeM.SnakeBody = new LinkedList<GameObject>();
@@ -43,12 +44,17 @@ public class SnakeView : MonoBehaviour
         snakeM.SnakeBody.First.Value.transform.position = snakeM.transform.position;
         snakeM.tmpPos = snakeM.transform.position;
         snakeM.InitIncrementor();
+        snakeM.IsGameFrozen = false;
     }
 
 
     private void MoveSnake()
     {
         if (snakeM.IsSnakeEmpty())
+        {
+            return;
+        }
+        if (snakeM.IsGameFrozen)
         {
             return;
         }
