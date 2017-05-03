@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SnakeView : MonoBehaviour
 {
@@ -16,16 +18,10 @@ public class SnakeView : MonoBehaviour
 
     public SnakeModel snakeM;
 
-    private Vector3 startPosition = new Vector3(0, 1f, 0);
-    private Vector3 startBodyPosition = new Vector3(-1000, 1f, -1000);
-    private Vector3 xBodyOffset = new Vector3(7f, 0, 0);
-    private Vector3 zBodyOffset = new Vector3(0, 0, 7f);
-    private int elementsLeft = 0;
-
     // Use this for initialization
     void Start () {
-		
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,10 +36,15 @@ public class SnakeView : MonoBehaviour
     private void Init()
     {
         DestroySnake();
+        snakeM.transform.position = GetRandomMapPosition();
         snakeM.SnakeBody = new LinkedList<GameObject>();
         AddPartToSnake(snakeM.snakeHeadConstructor);
+        snakeM.transform.position = GetRandomMapPosition();
+        snakeM.SnakeBody.First.Value.transform.position = snakeM.transform.position;
+        snakeM.tmpPos = snakeM.transform.position;
         snakeM.InitIncrementor();
     }
+
 
     private void MoveSnake()
     {
@@ -116,6 +117,7 @@ public class SnakeView : MonoBehaviour
 
     public void GenerateGround(float x, float z, int width, int length)
     {
+        DestroyWalls();
         TerrainData terData = new TerrainData();
         terData.size = new Vector3(width, 1, length);
         if (snakeM.Ground == null)
@@ -157,7 +159,7 @@ public class SnakeView : MonoBehaviour
             Destroy(snakeM.CurrentIncrementerGameObject);
         }
         snakeM.CurrentIncrementerGameObject = GameObject.Instantiate(snakeM.incrementerBodyConstructor);
-        snakeM.CurrentIncrementerGameObject.transform.position = GetRandomIncrementerPosition();
+        snakeM.CurrentIncrementerGameObject.transform.position = GetRandomMapPosition();
     }
 
     public void DestroySnake()
@@ -172,11 +174,49 @@ public class SnakeView : MonoBehaviour
         snakeM.SnakeBody = null;
     }
 
-    private Vector3 GetRandomIncrementerPosition()
+    public void DestroyWalls()
+    {
+        if (snakeM.AllWalls != null)
+        {
+            foreach (GameObject cur in snakeM.AllWalls)
+            {
+                Destroy(cur);
+            }
+        }
+    }
+
+    internal void CreateWall(int x, int z)
+    {
+        if(snakeM.AllWalls == null)
+        {
+            snakeM.AllWalls = new List<GameObject>();
+        }
+        GameObject wall = GameObject.Instantiate(snakeM.wallBodyConstructor);
+        wall.transform.position = new Vector3(x, 0, z);
+        snakeM.AllWalls.Add(wall);
+    }
+
+    public Vector3 GetRandomMapPosition()
     {
         //TODO
-        float randomX = Random.value * 10;
-        float randomZ = Random.value * 10;
+        float randomX = UnityEngine.Random.value * snakeM.GetLevelWidth();
+        if (snakeM.GetLevelWidth() - randomX > 2)
+        {
+            randomX += 2;
+        }
+        else
+        {
+            randomX -= 2;
+        }
+        float randomZ = UnityEngine.Random.value * snakeM.GetLevelLength();
+        if (snakeM.GetLevelLength() - randomZ > 2)
+        {
+            randomZ += 2;
+        }
+        else
+        {
+            randomZ -= 2;
+        }
         return new Vector3(randomX, 0, randomZ); ;
     }
     

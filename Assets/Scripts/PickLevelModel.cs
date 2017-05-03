@@ -85,6 +85,7 @@ public class PickLevelModel : MonoBehaviour
 
     public int GetLevelsHighScore(int level)
     {
+
         int highScore = 0;
         if (lvlsData.AllLevels.Count > level)
         {

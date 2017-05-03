@@ -13,17 +13,17 @@ public class PickLevelView : MonoBehaviour {
 
     public PickLevelModel pickLevelM;
 
+    public bool IsLevelsInited { get; set; }
+
     // Use this for initialization
     void Start() {
-        InitLevels();
+        IsLevelsInited = false;
     }
 
     // Update is called once per frame
     void Update() {
         
     }
-
-    
 
     public void RenderLvlButtons(int page)
     {
@@ -37,10 +37,12 @@ public class PickLevelView : MonoBehaviour {
         }
     }
 
-    private void InitLevels()
+    public void InitLevels()
     {
-        while (pickLevelM.LevelsButtons == null) ;
-        while (pickLevelM.LevelsButtons.Capacity == 0) ;
+        //while (pickLevelM.LevelsButtons == null) ;
+        //while (pickLevelM.LevelsButtons.Capacity == 0) ;
+        //while (pickLevelM.GetLevelsData() == null) ;
+        //while (pickLevelM.GetLevelsData().AllLevels == null) ;
         int row = 0;
         int col = 0;
         foreach (Button cur in pickLevelM.LevelsButtons)

@@ -41,7 +41,7 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     private void OnBtnPickLevelClick()
     {
         curLevel = EventSystem.current.currentSelectedGameObject.GetComponent<ButtonLevelData>().Lvl;
-        app.snakeCtrl.loadLevel(curLevel);
+        app.snakeCtrl.LoadLevel(curLevel);
         setVisibility(false);
         app.snakeCtrl.SetVisibility(true);
     }
@@ -92,6 +92,11 @@ public class PickLevelController : MonoBehaviour, ICameraUser
             SaveLevelsData(lvlsData);
         }
         pickLevelV.pickLevelM.SetLevelsData(lvlsData);
+        if (!pickLevelV.IsLevelsInited)
+        {
+            pickLevelV.InitLevels();
+            pickLevelV.IsLevelsInited = true;
+        }
         pickLevelV.RenderLvlButtons(curPage);
     }
 

@@ -2,15 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncrementerController : MonoBehaviour {
+public class IncrementerController : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
+    private const float SLEEP_TIME = 10;
+    private const float REPEAT_RATE = 10;
+
+    public Application App { get; set; }
+
+    // Use this for initialization
+    void Start()
+    {
         gameObject.name = GameObjectNames.SNAKE_INCREMENTER_NAME;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    
+    void Awake()
+    {
+        InvokeRepeating("UpdatePosition", SLEEP_TIME,REPEAT_RATE);
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.name == GameObjectNames.SNAKE_WALL_NAME)
+        {
+            UpdatePosition();
+        }
+    }
+
+    void UpdatePosition()
+    {
+        gameObject.transform.position = App.snakeCtrl.snakeV.GetRandomMapPosition();
+    }
+
 }

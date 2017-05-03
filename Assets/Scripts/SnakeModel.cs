@@ -6,6 +6,9 @@ public class SnakeModel : MonoBehaviour
 {
 
     public const int WIN_MUL = 10;
+    public const int GROUND_X = 0;
+    public const int GROUND_Z = 0;
+    public const char EMPTY_SPACE = ' ';
 
     private const float POSITION_THRESHOLD = 4.5f;
     private const int START_INCREMENTER = 0;
@@ -19,12 +22,12 @@ public class SnakeModel : MonoBehaviour
     public PhysicMaterial groundPhysMaterial;
     public Texture2D[] groundTexture;
     public float speed;
-    private Vector3 startPosition = new Vector3(0, 5f, 0);
+    private Vector3 startPosition = new Vector3(1, 5f, 1);
 
     public Vector3 tmpPos;
 
-    private Vector3 lastTailPosition;
-
+    public List<GameObject> AllWalls { get; set; }
+    
     public int Incrementer { get; set; }
 
     public GameObject Ground { get; set; }
@@ -34,12 +37,13 @@ public class SnakeModel : MonoBehaviour
     public int LevelWinScore { get; set; }
     public int CurrentLevel { get; set; }
 
+    public List<string> LevelMap { get; set; }
+
     public GameObject CurrentIncrementerGameObject { get; set; }
 
     // Use this for initialization
     void Start () {
         SnakeBody = null;
-        lastTailPosition = Vector3.zero;
         gameObject.transform.position = startPosition;
         CanAddNewElement = false;
         InitIncrementor();
@@ -60,22 +64,6 @@ public class SnakeModel : MonoBehaviour
     public LinkedList<GameObject> SnakeBody { get; set; }
 
     internal SnakeDirection Direction { get; set; }
-    public Vector3 LastTailPosition
-    {
-        get
-        {
-            return lastTailPosition;
-        }
-        set
-        {
-            if (!HasSamePosition(value,lastTailPosition))
-            {
-                Debug.Log("changing tail pos");
-                lastTailPosition = value;
-                CanAddNewElement = true;
-            }
-        }
-    }
 
     public bool HasSamePosition(Vector3 pos1, Vector3 pos2)
     {
@@ -108,6 +96,25 @@ public class SnakeModel : MonoBehaviour
     public bool IsSnakeEmpty()
     {
         return ((SnakeBody == null) || (SnakeBody.Count == 0));
+    }
+
+    public int GetLevelWidth()
+    {
+        if(LevelMap == null)
+        {
+            return 0;
+        }
+        return LevelMap[0].Length;
+    }
+
+
+    public int GetLevelLength()
+    {
+        if (LevelMap == null)
+        {
+            return 0;
+        }
+        return LevelMap.Count;
     }
 
 }

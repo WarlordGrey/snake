@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,14 +45,20 @@ public class SnakeController : MonoBehaviour, ICameraUser {
         gameObject.transform.position = snakeV.transform.position;
     }
 
-    public void loadLevel(int level)
+    public void LoadLevel(int level)
     {
         snakeV.snakeM.CurrentLevel = level;
-        LoadLevelGround();
+        if (!LoadLevelGround())
+        {
+            SetVisibility(false);
+            //todo error msg
+            app.pickLevelCtrl.setVisibility(true);
+            return;
+        }
         SetSnakeDirection(curDirection);
         snakeV.CreateSnake();
         snakeV.snakeM.SnakeBody.First.Value.GetComponent<SnakeHeadController>().App = app;
-        snakeV.GenerateIncrementer();
+        GenerateIncrementer();
         snakeV.snakeM.LevelWinScore = level * SnakeModel.WIN_MUL;
     }
 
@@ -97,7 +104,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
     {
         snakeV.AddSnakeLength(snakeV.snakeM.Incrementer);
         snakeV.snakeM.CurrentScore += snakeV.snakeM.Incrementer;
-        snakeV.GenerateIncrementer();
+        GenerateIncrementer();
         if (IsWin())
         {
             Win();
@@ -106,13 +113,13 @@ public class SnakeController : MonoBehaviour, ICameraUser {
 
     public void Lose()
     {
-        //TODO
+        //TODO lose msg
         ExitFromLevel();
     }
 
     public void Win()
     {
-        //TODO
+        //TODO win msg
         app.pickLevelCtrl.SetLevelCompleted(snakeV.snakeM.CurrentLevel);
         ExitFromLevel();
     }
@@ -146,9 +153,45 @@ public class SnakeController : MonoBehaviour, ICameraUser {
         return ((snakeV.snakeM.LevelWinScore - snakeV.snakeM.CurrentScore) < 0);
     }
 
-    public void LoadLevelGround()
+    public bool LoadLevelGround()
     {
-        GenerateGround(-10, -10, 200, 200);
+        snakeV.snakeM.LevelMap = DataManipulator.GetInstance().GetLevel(snakeV.snakeM.CurrentLevel);
+        if (snakeV.snakeM.LevelMap.Count == 0)
+        {
+            return false;
+        }
+        int width = snakeV.snakeM.GetLevelWidth();
+        int len = snakeV.snakeM.GetLevelLength();
+        GenerateGround(SnakeModel.GROUND_X, SnakeModel.GROUND_Z, width, len);
+        int i = 0;
+        foreach (string cur in snakeV.snakeM.LevelMap)
+        {
+            for (int j = 0; j < cur.Length; j++)
+            {
+                switch (cur[j])
+                {
+                    case SnakeModel.EMPTY_SPACE:
+
+                        break;
+                    default:
+                        CreateWall(cur.Length - j, snakeV.snakeM.GetLevelLength() - i);
+                        break;
+                }
+            }
+            i++;
+        }
+        return true;
+    }
+
+    private void CreateWall(int x, int z)
+    {
+        snakeV.CreateWall(x,z);
+    }
+
+    private void GenerateIncrementer()
+    {
+        snakeV.GenerateIncrementer();
+        snakeV.snakeM.CurrentIncrementerGameObject.GetComponent<IncrementerController>().App = app;
     }
 
 }
