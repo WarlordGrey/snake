@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class GameObjectNames
+public class GameObjectNames
 {
 
     public const string SNAKE_HEAD_NAME = "snake head";

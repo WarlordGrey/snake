@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-    interface ICameraUser
+    public interface ICameraUser
     {
 
         void EnableCamera();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogBoxController : MonoBehaviour {
 
-    public Application app;
+    public ApplicationSnake app;
     public DialogBoxView dialBV;
 
     public delegate void OnClickActionImpl();
@@ -12,12 +12,10 @@ public class DialogBoxController : MonoBehaviour {
     public OnClickActionImpl okClickImpl;
     public OnClickActionImpl cancelClickImpl;
 
-    // Use this for initialization
     void Start () {
         SetVisibility(false);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}

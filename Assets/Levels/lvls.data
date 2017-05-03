@@ -2,19 +2,19 @@
 <PickLevelData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AllLevels>
     <SingleLevelData>
-      <HighScore>15</HighScore>
-      <IsCompleted>true</IsCompleted>
+      <HighScore>0</HighScore>
+      <IsCompleted>false</IsCompleted>
     </SingleLevelData>
     <SingleLevelData>
-      <HighScore>21</HighScore>
-      <IsCompleted>true</IsCompleted>
+      <HighScore>0</HighScore>
+      <IsCompleted>false</IsCompleted>
     </SingleLevelData>
     <SingleLevelData>
-      <HighScore>36</HighScore>
-      <IsCompleted>true</IsCompleted>
+      <HighScore>0</HighScore>
+      <IsCompleted>false</IsCompleted>
     </SingleLevelData>
     <SingleLevelData>
-      <HighScore>10</HighScore>
+      <HighScore>0</HighScore>
       <IsCompleted>false</IsCompleted>
     </SingleLevelData>
     <SingleLevelData>

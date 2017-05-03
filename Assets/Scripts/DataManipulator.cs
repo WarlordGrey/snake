@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
 
-class DataManipulator
+public class DataManipulator
 {
 
     private static DataManipulator me = null;
@@ -42,18 +42,10 @@ class DataManipulator
         }
         catch (Exception ex)
         {
-            //Log exception here
             Debug.Log(ex);
-            Debug.Log(ex.StackTrace);
         }
     }
 
-    /// <summary>
-    /// Deserializes an xml file into an object list
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="fileName"></param>
-    /// <returns></returns>
     public T DeSerializeObject<T>(string fileName)
     {
         if (string.IsNullOrEmpty(fileName)) { return default(T); }
@@ -106,6 +98,14 @@ class DataManipulator
         }
         file.Close();
         return levelMap;
+    }
+
+    public void DeleteAllSaves()
+    {
+        if (File.Exists(PickLevelModel.DATA_FILENAME))
+        {
+            File.Delete(PickLevelModel.DATA_FILENAME);
+        }
     }
 
 }

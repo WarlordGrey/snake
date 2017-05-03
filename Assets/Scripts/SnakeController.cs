@@ -5,40 +5,56 @@ using UnityEngine;
 
 public class SnakeController : MonoBehaviour, ICameraUser {
 
-    public Application app;
+    public ApplicationSnake app;
     public SnakeView snakeV;
 
     private SnakeDirection curDirection;
     private bool isLastDialogAccepted;
-    private ContinueMethod currentContinueMethod;
     private delegate void ContinueMethod();
-
-    // Use this for initialization
+    private ContinueMethod currentContinueMethod;
+    private bool isActive;
+    
     void Start () {
         curDirection = SnakeDirection.RIGHT;
+        isActive = false;
     }
 	
-	// Update is called once per frame
 	void Update () {
+        if (!isActive)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            curDirection = SnakeDirection.LEFT;
-            snakeV.CurTick = snakeV.MaxTicks;
+            if (curDirection != SnakeDirection.RIGHT)
+            {
+                curDirection = SnakeDirection.LEFT;
+                snakeV.CurTick = snakeV.MaxTicks;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            curDirection = SnakeDirection.RIGHT;
-            snakeV.CurTick = snakeV.MaxTicks;
+            if(curDirection != SnakeDirection.LEFT)
+            {
+                curDirection = SnakeDirection.RIGHT;
+                snakeV.CurTick = snakeV.MaxTicks;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            curDirection = SnakeDirection.UP;
-            snakeV.CurTick = snakeV.MaxTicks;
+            if (curDirection != SnakeDirection.DOWN)
+            {
+                curDirection = SnakeDirection.UP;
+                snakeV.CurTick = snakeV.MaxTicks;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            curDirection = SnakeDirection.DOWN;
-            snakeV.CurTick = snakeV.MaxTicks;
+            if (curDirection != SnakeDirection.UP)
+            {
+                curDirection = SnakeDirection.DOWN;
+                snakeV.CurTick = snakeV.MaxTicks;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -95,6 +111,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
         {
             DisableCamera();
         }
+        isActive = visibility;
     }
 
     private void GenerateGround(float x, float y, int width, int length)
@@ -262,7 +279,6 @@ public class SnakeController : MonoBehaviour, ICameraUser {
         app.dialogCtrl.SetVisibilityButtonCancel(showCancel);
         app.dialogCtrl.SetText(msg);
         app.dialogCtrl.SetVisibility(true);
-        //SetVisibility(false);
     }
 
 }

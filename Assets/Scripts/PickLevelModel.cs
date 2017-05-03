@@ -29,34 +29,23 @@ public class PickLevelModel : MonoBehaviour
             lvlCnt = value;
         }
     }
-
-    // Use this for initialization
+    
     void Start () {
-        InitLevelsButtons();
+        
     }
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    private void InitLevelsButtons()
+    public string GetLevelDescription(int level)
     {
-        LevelsButtons = new List<Button>();
-        int btnCnt = GetMaxLevelsPerPage();
-        for (int i = 0; i < btnCnt; i++)
+        String retVal = level.ToString();
+        if(GetLevelsHighScore(level) > 0)
         {
-            Button newLvl = Button.Instantiate(typicalPickLevelButton);
-            newLvl.transform.SetParent(pickLevelCanvas.gameObject.transform);
-            newLvl.gameObject.AddComponent<ButtonLevelData>();
-            newLvl.gameObject.GetComponent<ButtonLevelData>().Lvl = i + 1;
-            LevelsButtons.Add(newLvl);
+            retVal += "\n-----\n" + GetLevelsHighScore(level).ToString();
         }
-    }
-
-    internal string GetLevelDescription(int level)
-    {
-        return level.ToString() + "\n-----\n" + GetLevelsHighScore(level).ToString();
+        return retVal;
     }
 
     public int GetMaxLevelsPerPage()

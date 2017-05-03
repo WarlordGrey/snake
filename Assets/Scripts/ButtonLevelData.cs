@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class ButtonLevelData : MonoBehaviour
+public class ButtonLevelData : MonoBehaviour
 {
     public int Lvl { get; set; }
 
@@ -13,7 +13,6 @@ class ButtonLevelData : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

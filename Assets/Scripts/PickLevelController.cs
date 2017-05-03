@@ -8,19 +8,17 @@ using UnityEngine.UI;
 public class PickLevelController : MonoBehaviour, ICameraUser
 {
 
-    public Application app;
+    public ApplicationSnake app;
     public PickLevelView pickLevelV;
 
     private int curPage;
     private int curLevel;
-
-    // Use this for initialization
+    
     void Start () {
         curPage = 1;
         InitLevels();
     }
 	
-	// Update is called once per frame
 	void Update () {
 
 	}
@@ -49,7 +47,7 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     public void OnReturnToMenuClick()
     {
         setVisibility(false);
-        app.mainMenuCtrl.setVisibility(true);
+        app.mainMenuCtrl.SetVisibility(true);
     }
 
     public void OnNextPageClick()
@@ -73,8 +71,7 @@ public class PickLevelController : MonoBehaviour, ICameraUser
 
     private void InitLevels()
     {
-        while (pickLevelV.pickLevelM.LevelsButtons == null);
-        while (pickLevelV.pickLevelM.LevelsButtons.Count == 0);
+        pickLevelV.InitLevelsButtons();
         foreach (Button cur in pickLevelV.pickLevelM.LevelsButtons)
         {
             
@@ -148,6 +145,12 @@ public class PickLevelController : MonoBehaviour, ICameraUser
     public void SetLevelCompleted(int level)
     {
         pickLevelV.pickLevelM.SetLevelCompleted(level);
+    }
+
+    public void DeleteAllSaves()
+    {
+        DataManipulator.GetInstance().DeleteAllSaves();
+        LoadLevelsData();
     }
 
 }

@@ -5,18 +5,16 @@ using UnityEngine;
 public class IncrementerController : MonoBehaviour
 {
 
-    private const float SLEEP_TIME = 50;
-    private const float REPEAT_RATE = 50;
+    private const float SLEEP_TIME = 25;
+    private const float REPEAT_RATE = 25;
 
-    public Application App { get; set; }
-
-    // Use this for initialization
+    public ApplicationSnake App { get; set; }
+    
     void Start()
     {
         gameObject.name = GameObjectNames.SNAKE_INCREMENTER_NAME;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
 

@@ -13,17 +13,15 @@ public class SnakeView : MonoBehaviour
     private const float DISTANCE = 0.2f;
     private const float GROUND_Y = -0.6f;
 
-    public int MaxTicks { get { return 20; } } 
+    public int MaxTicks { get { return 5; } } 
     public int CurTick { get; set; }
 
     public SnakeModel snakeM;
-
-    // Use this for initialization
+    
     void Start () {
 
     }
 	
-	// Update is called once per frame
 	void Update () {
         MoveSnake();
         gameObject.transform.position = snakeM.transform.position;
@@ -204,7 +202,7 @@ public class SnakeView : MonoBehaviour
 
     public Vector3 GetRandomMapPosition()
     {
-        //TODO
+        //TODO (can be optimized but now it isn't necessary)
         float randomX = UnityEngine.Random.value * snakeM.GetLevelWidth();
         if (snakeM.GetLevelWidth() - randomX > 2)
         {

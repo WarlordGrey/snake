@@ -18,14 +18,12 @@ public class SnakeModel : MonoBehaviour
     private const int START_INCREMENTER = 0;
 
     public Camera camera;
-    public Light light;
     public GameObject snakeHeadConstructor;
     public GameObject snakeBodyConstructor;
     public GameObject wallBodyConstructor;
     public GameObject incrementerBodyConstructor;
     public PhysicMaterial groundPhysMaterial;
     public Texture2D[] groundTexture;
-    public float speed;
     public Vector3 tmpPos;
 
     private Vector3 startPosition = new Vector3(1, 5f, 1);
@@ -48,7 +46,6 @@ public class SnakeModel : MonoBehaviour
 
     public bool IsGameFrozen { get; set; }
 
-    // Use this for initialization
     void Start () {
         SnakeBody = null;
         gameObject.transform.position = startPosition;
@@ -58,15 +55,8 @@ public class SnakeModel : MonoBehaviour
         IsGameFrozen = false;
     }
 	
-	// Update is called once per frame
 	void Update () {
-        if(SnakeBody != null)
-        {
-            if(SnakeBody.Count > 0)
-            {
-                //gameObject.transform.position = SnakeBody.First.Value.transform.position;
-            }
-        }
+        
     }
 
     public LinkedList<GameObject> SnakeBody { get; set; }
@@ -85,13 +75,6 @@ public class SnakeModel : MonoBehaviour
 
     public Vector3 GetCameraPosition()
     {
-        /*
-        if((SnakeBody == null) || (SnakeBody.Count == 0))
-        {
-            return transform.position;
-        }
-        return SnakeBody.First.Value.transform.position;
-        */
         return transform.position;
     }
 

@@ -9,14 +9,12 @@ public class SnakeCameraController : MonoBehaviour {
 
     private const string SCORE_TEXT = "Score: ";
     private Vector3 offset;
-
-    // Use this for initialization
+    
     void Start () {
         offset = transform.position - player.transform.position;
         
     }
 	
-	// Update is called once per frame
 	void LateUpdate () {
         transform.position = player.GetCameraPosition() + offset;
         gameObject.GetComponentInChildren<Canvas>().gameObject.GetComponentInChildren<Text>().text = SCORE_TEXT + player.CurrentScore;

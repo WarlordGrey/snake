@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SnakeHeadController : SnakeAllBodyPartController {
 
-    public Application App { get; set; }
+    public ApplicationSnake App { get; set; }
 
     void Start()
     {

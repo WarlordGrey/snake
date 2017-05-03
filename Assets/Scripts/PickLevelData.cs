@@ -6,6 +6,5 @@ using UnityEngine;
 public class PickLevelData {
 
     public List<SingleLevelData> AllLevels { get; set; }
-    
 
 }

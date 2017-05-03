@@ -10,8 +10,7 @@ public class DialogBoxView : MonoBehaviour {
     private Button btnCancel;
     private Canvas canvas;
     private Text message;
-
-    // Use this for initialization
+    
     void Start() {
         InitButtons();
         canvas = gameObject.GetComponentInChildren<Canvas>();
@@ -35,8 +34,7 @@ public class DialogBoxView : MonoBehaviour {
             }
         }
     }
-
-    // Update is called once per frame
+    
     void Update() {
 
     }
@@ -61,8 +59,16 @@ public class DialogBoxView : MonoBehaviour {
         message.text = msg;
     }
 
-    internal void SetVisibility(bool visibility)
+    public void SetVisibility(bool visibility)
     {
         canvas.gameObject.SetActive(visibility);
+        if (visibility)
+        {
+            canvas.transform.SetAsLastSibling();
+        }
+        else
+        {
+            canvas.transform.SetAsFirstSibling();
+        }
     }
 }
