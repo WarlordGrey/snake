@@ -83,7 +83,7 @@ public class DataManipulator
 
     public List<string> GetLevel(int level)
     {
-        return ReadFile("Assets/Levels/" + level + ".lvl");
+        return ReadFile(Application.streamingAssetsPath + "\\" + level + ".lvl");
     }
 
     public List<String> ReadFile(string fileName)

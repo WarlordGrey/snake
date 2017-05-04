@@ -7,7 +7,15 @@ using UnityEngine.UI;
 public class PickLevelModel : MonoBehaviour
 {
 
-    public const string DATA_FILENAME = "Assets/Levels/lvls.data";
+    public static string DATA_FILENAME {
+        get {
+            if (dataFilename == null)
+            {
+                dataFilename = Application.streamingAssetsPath + "\\lvls.data";
+            }
+            return dataFilename;
+        }
+    }
     public const int LEVELS_PER_ROW = 4;
     public const int LEVELS_PER_COLUMN = 5;
 
@@ -18,6 +26,7 @@ public class PickLevelModel : MonoBehaviour
 
     private int lvlCnt = 20;
     private PickLevelData lvlsData;
+    private static string dataFilename = null;
 
     public List<Button> LevelsButtons { get; set; }
     public int LevelsCount {

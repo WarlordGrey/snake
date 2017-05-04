@@ -17,7 +17,7 @@ Platform assembly: C:\projects\mine\snake\snakeWG_Data\Managed\UnityEngine.Netwo
 Loading C:\projects\mine\snake\snakeWG_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\projects\mine\snake\snakeWG_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\projects\mine\snake\snakeWG_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.031 seconds
+- Completed reload, in  0.040 seconds
 Platform assembly: C:\projects\mine\snake\snakeWG_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\projects\mine\snake\snakeWG_Data\Managed\System.dll (this message is harmless)
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
@@ -25,7 +25,7 @@ desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.127641 ms
+UnloadTime: 1.513662 ms
 Platform assembly: C:\projects\mine\snake\snakeWG_Data\Managed\System.Xml.dll (this message is harmless)
 System.ArgumentException: Encoding name 'windows-1251' not supported
 Parameter name: name
@@ -40,7 +40,7 @@ Parameter name: name
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-System.IO.IOException: Sharing violation on path C:\projects\mine\snake\Assets\Levels\lvls.data
+System.IO.IOException: Sharing violation on path C:\projects\mine\snake\snakeWG_Data\StreamingAssets\lvls.data
   at System.IO.FileStream..ctor (System.String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, Boolean anonymous, FileOptions options) [0x00000] in <filename unknown>:0 
   at System.IO.FileStream..ctor (System.String path, FileMode mode, FileAccess access, FileShare share) [0x00000] in <filename unknown>:0 
   at System.Xml.XmlTextWriter..ctor (System.String filename, System.Text.Encoding encoding) [0x00000] in <filename unknown>:0 
@@ -50,5 +50,5 @@ System.IO.IOException: Sharing violation on path C:\projects\mine\snake\Assets\L
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1b64 -> priority: 1 
-  Thread -> id: 27b8 -> priority: 1 
+  Thread -> id: 1884 -> priority: 1 
+  Thread -> id: 1eb4 -> priority: 1 
