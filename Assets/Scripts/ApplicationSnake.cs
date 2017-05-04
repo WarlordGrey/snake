@@ -8,8 +8,7 @@ public class ApplicationSnake : MonoBehaviour {
     public PickLevelController pickLevelCtrl;
     public SnakeController snakeCtrl;
     public DialogBoxController dialogCtrl;
-    public AudioSource fxSound;
-    public AudioClip backMusic;
+    public AudioSource mainTheme;
 
     private List<ICameraUser> camUsers = null;
 
@@ -17,13 +16,18 @@ public class ApplicationSnake : MonoBehaviour {
     {
         mainMenuCtrl.SetVisibility(true);
         pickLevelCtrl.setVisibility(false);
-        fxSound = GetComponent<AudioSource>();
-        fxSound.Play();
+        IsMainThemeOn = true;
+        if (IsMainThemeOn)
+        {
+            mainTheme.Play();
+        }
     }
 	
 	void Update () {
 		
 	}
+
+    public bool IsMainThemeOn { get; set; }
 
     public List<ICameraUser> GetCameraUsers()
     {

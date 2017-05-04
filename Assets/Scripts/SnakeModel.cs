@@ -25,6 +25,9 @@ public class SnakeModel : MonoBehaviour
     public PhysicMaterial groundPhysMaterial;
     public Texture2D[] groundTexture;
     public Vector3 tmpPos;
+    public AudioSource explosionSource;
+    public AudioSource winSource;
+    public AudioSource increaseSnakeSource;
 
     private Vector3 startPosition = new Vector3(1, 5f, 1);
     private delegate void OnClickActionImpl();

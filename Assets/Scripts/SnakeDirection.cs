@@ -8,5 +8,6 @@ using System.Text;
         LEFT,
         RIGHT,
         UP,
-        DOWN
+        DOWN,
+        NONE
     }

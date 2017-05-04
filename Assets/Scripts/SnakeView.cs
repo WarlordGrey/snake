@@ -56,6 +56,10 @@ public class SnakeView : MonoBehaviour
         {
             return;
         }
+        if (snakeM.Direction == SnakeDirection.NONE)
+        {
+            return;
+        }
         CurTick++;
         if(CurTick >= MaxTicks)
         {
@@ -204,7 +208,7 @@ public class SnakeView : MonoBehaviour
     {
         //TODO (can be optimized but now it isn't necessary)
         float randomX = UnityEngine.Random.value * snakeM.GetLevelWidth();
-        if (snakeM.GetLevelWidth() - randomX > 2)
+        if (snakeM.GetLevelWidth() - randomX > 4)
         {
             randomX += 2;
         }
@@ -213,7 +217,7 @@ public class SnakeView : MonoBehaviour
             randomX -= 2;
         }
         float randomZ = UnityEngine.Random.value * snakeM.GetLevelLength();
-        if (snakeM.GetLevelLength() - randomZ > 2)
+        if (snakeM.GetLevelLength() - randomZ > 4)
         {
             randomZ += 2;
         }

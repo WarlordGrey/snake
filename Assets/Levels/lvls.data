@@ -2,8 +2,8 @@
 <PickLevelData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AllLevels>
     <SingleLevelData>
-      <HighScore>0</HighScore>
-      <IsCompleted>false</IsCompleted>
+      <HighScore>15</HighScore>
+      <IsCompleted>true</IsCompleted>
     </SingleLevelData>
     <SingleLevelData>
       <HighScore>0</HighScore>

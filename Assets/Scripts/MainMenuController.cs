@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour, ICameraUser
 {
@@ -105,6 +106,23 @@ public class MainMenuController : MonoBehaviour, ICameraUser
     {
         isLastDialogAccepted = false;
         HideDialogBox();
+    }
+
+    public void OnButtonMute()
+    {
+        Image curImg = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
+        if (app.IsMainThemeOn)
+        {
+            curImg.sprite = mainMenuV.mainMenuModel.soundOn;
+            app.mainTheme.Stop();
+            app.IsMainThemeOn = false;
+        }
+        else
+        {
+            curImg.sprite = mainMenuV.mainMenuModel.soundOff;
+            app.mainTheme.Play();
+            app.IsMainThemeOn = true;
+        }
     }
     
 }

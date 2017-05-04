@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuModel : MonoBehaviour {
 
@@ -9,7 +10,9 @@ public class MainMenuModel : MonoBehaviour {
     public Canvas mainCanvas;
     public Camera camera;
     public Light light;
-    
+    public Sprite soundOn;
+    public Sprite soundOff;
+
     void Start () {
         
 	}

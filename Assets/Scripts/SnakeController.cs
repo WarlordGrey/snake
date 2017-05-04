@@ -15,7 +15,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
     private bool isActive;
     
     void Start () {
-        curDirection = SnakeDirection.RIGHT;
+        curDirection = SnakeDirection.NONE;
         isActive = false;
     }
 	
@@ -66,6 +66,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
 
     public void LoadLevel(int level)
     {
+        curDirection = SnakeDirection.NONE;
         snakeV.snakeM.CurrentLevel = level;
         if (!LoadLevelGround())
         {
@@ -126,6 +127,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
 
     public void IncreaseSnakeSize()
     {
+        snakeV.snakeM.increaseSnakeSource.Play();
         snakeV.AddSnakeLength(snakeV.snakeM.Incrementer);
         snakeV.snakeM.CurrentScore += snakeV.snakeM.Incrementer;
         GenerateIncrementer();
@@ -138,6 +140,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
     public void Lose()
     {
         FreezeGame(true);
+        snakeV.snakeM.explosionSource.Play();
         ShowDialogBox(SnakeModel.MSG_LOSE, false, LoseContinueMethod);
     }
 
@@ -149,6 +152,7 @@ public class SnakeController : MonoBehaviour, ICameraUser {
     public void Win()
     {
         FreezeGame(true);
+        snakeV.snakeM.winSource.Play();
         ShowDialogBox(SnakeModel.MSG_WIN, false, WinContinueMethod);
     }
 
